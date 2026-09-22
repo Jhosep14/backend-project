@@ -1,0 +1,27 @@
+{
+  "name": "backend-project",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch",
+    "dev": "concurrently \"node --watch --watch-path=./src server.js\" \"tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch\"",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^18.0.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.5",
+    "tailwindcss": "^4.3.3",
+    "ws": "^8.21.3"
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script type="module" src="/js/main.js"></script>
+    <% if (NODE_ENV.includes('dev')) { %>
+        <script>
+            // Get the current hostname and port from the browser
+            const host = window.location.hostname;
+            const currentPort = window.location.port;
+            // Calculate WebSocket port (current port + 1)
+            const wsPort = currentPort ? (parseInt(currentPort) + 1) : 3001;
+            // Create WebSocket connection using dynamic hostname and port
+            const ws = new WebSocket(`ws://${host}:${wsPort}`);
+            ws.onclose = () => {
+                setTimeout(() => location.reload(), 500);
+            };
+        </script>
+        <% } %>
+</head>
+
+<body>
+    <header class="flex flex-col md:flex-row justify-between items-center bg-amber-100 p-4 mb-5">
+        <div>
+            <h1 class="text-2xl font-bold">Backend Project</h1>
+        </div>
+        <nav class="flex justify-around items-center gap-5">
+            <ul class="flex justify-around gap-10">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/products">Products</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-2xl"
+                onclick="window.location.href='/login'">Login</button>
+        </nav>
+
+    </header>
