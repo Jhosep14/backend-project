@@ -6,22 +6,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --minify",
     "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch",
-    "dev": "concurrently \"node --watch --watch-path=./src server.js\" \"tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch\"",
-    "start": "node server.js"
+    "dev": "concurrently \"node --env-file=.env --watch server.js\" \"tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch\" \"browser-sync start --proxy 'localhost:3000' --port 3001 --files 'public/css/*.css, src/views/**/*.ejs' --no-open\"",
+    "start": "node --env-file=.env server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "dotenv": "^18.0.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "browser-sync": "^3.0.4",
     "concurrently": "^10.0.5",
-    "tailwindcss": "^4.3.3",
-    "ws": "^8.21.3"
+    "tailwindcss": "^4.3.3"
   }
 }
