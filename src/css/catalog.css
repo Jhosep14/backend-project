@@ -1,0 +1,35 @@
+.main {
+    @apply flex flex-col items-center gap-2;
+}
+
+.course-catalog-title {
+    @apply text-3xl font-bold;
+}
+
+.course-catalog-description {
+    @apply text-lg text-gray-800 font-light;
+}
+
+.course-list {
+    @apply flex flex-col gap-2;
+}
+
+.course-card {
+    @apply bg-blue-100 p-2 border rounded-2xl border-blue-800;
+
+    @variant hover {
+        @apply bg-blue-300;
+    }
+}
+
+.course-title {
+    @apply text-lg font-bold hover:text-blue-600 hover:cursor-pointer;
+}
+
+.course-id {
+    @apply font-mono text-sm text-gray-800;
+}
+
+.course-description {
+    @apply text-base ;
+}

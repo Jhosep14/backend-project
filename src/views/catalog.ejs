@@ -1,13 +1,13 @@
 <%- include('partials/header') %>
 
-<main>
-    <h1>Course Catalog</h1>
-    <p>Browse the available courses and select one to view its sections and instructors.</p>
+<main class="main">
+    <h1 class="course-catalog-title">Course Catalog</h1>
+    <p class="course-catalog-description">Browse the available courses and select one to view its sections and instructors.</p>
 
     <div class="course-list">
         <% Object.values(courses).forEach((course) => { %>
             <article class="course-card">
-                <h2>
+                <h2 class="course-title">
                     <a href="/catalog/<%= course.id %>"><%= course.title %></a>
                 </h2>
                 <p class="course-id"><%= course.id %> &bull; <%= course.credits %> credits</p>
