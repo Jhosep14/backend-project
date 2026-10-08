@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main>
+    <section class="course-header">
+        <h1><%= course.title %></h1>
+        <p class="course-meta"><%= course.id %> &bull; <%= course.credits %> credits</p>
+        <p class="course-description"><%= course.description %></p>
+    </section>
+
+    <section class="sections">
+        <h2>Available Sections</h2>
+
+        <nav aria-label="Sort course sections">
+            <span>Sort by:</span>
+            <a href="?sort=time"<%= currentSort === 'time' ? ' aria-current="page"' : '' %>>Time</a>
+            <a href="?sort=professor"<%= currentSort === 'professor' ? ' aria-current="page"' : '' %>>Professor</a>
+            <a href="?sort=room"<%= currentSort === 'room' ? ' aria-current="page"' : '' %>>Room</a>
+        </nav>
+
+        <div class="section-list">
+            <% course.sections.forEach((section) => { %>
+                <article class="section-card">
+                    <p class="section-time"><%= section.time %></p>
+                    <p class="section-room">Room: <%= section.room %></p>
+                    <p class="section-professor">Instructor: <%= section.professor %></p>
+                </article>
+            <% }); %>
+        </div>
+    </section>
+
+    <p><a href="/catalog">&larr; Back to Course Catalog</a></p>
+</main>
+
+<%- include('partials/footer') %>

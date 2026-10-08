@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<main>
+    <h1><%= title %></h1>
+
+    <section class="demo-section">
+        <h2>Global Middleware Results</h2>
+        <div><strong>Greeting:</strong> <%- greeting %></div>
+        <p><strong>Current year:</strong> <%= currentYear %></p>
+        <p><strong>Theme:</strong> <%= bodyClass %></p>
+
+        <% if (Object.keys(queryParams).length > 0) { %>
+            <h3>Query Parameters</h3>
+            <ul>
+                <% Object.entries(queryParams).forEach(([key, value]) => { %>
+                    <li><%= key %>: <%= value %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No query parameters. Try adding <code>?debug=true</code> to the URL.</p>
+        <% } %>
+    </section>
+
+    <section class="demo-section">
+        <h2>Route-Specific Middleware Results</h2>
+        <p>This response contains the special headers added by the demo middleware.</p>
+        <p>Open the browser developer tools and inspect the request in the Network tab to see them.</p>
+    </section>
+
+    <p><a href="/">&larr; Back to Home</a></p>
+</main>
+
+<%- include('partials/footer') %>

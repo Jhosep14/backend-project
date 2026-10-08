@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<main>
+    <h1>Course Catalog</h1>
+    <p>Browse the available courses and select one to view its sections and instructors.</p>
+
+    <div class="course-list">
+        <% Object.values(courses).forEach((course) => { %>
+            <article class="course-card">
+                <h2>
+                    <a href="/catalog/<%= course.id %>"><%= course.title %></a>
+                </h2>
+                <p class="course-id"><%= course.id %> &bull; <%= course.credits %> credits</p>
+                <p class="course-description"><%= course.description %></p>
+            </article>
+        <% }); %>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

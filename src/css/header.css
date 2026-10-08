@@ -1,1 +1,28 @@
-/* Custom header styles */
+/* Shared header styles */
+.site-header {
+    @apply flex flex-col items-center justify-between bg-amber-100 p-4 mb-5;
+
+    @variant md {
+        @apply flex-row;
+    }
+}
+
+.site-title {
+    @apply text-2xl font-bold;
+}
+
+.site-nav {
+    @apply flex items-center justify-around gap-5;
+}
+
+.site-nav-list {
+    @apply flex justify-around gap-10;
+}
+
+.site-login-button {
+    @apply rounded-2xl bg-red-500 px-4 py-2 text-white;
+
+    @variant hover {
+        @apply bg-amber-900;
+    }
+}

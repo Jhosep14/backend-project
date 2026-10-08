@@ -2,6 +2,7 @@
   "name": "backend-project",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --minify",

@@ -8,10 +8,8 @@
       "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-300: oklch(80.8% 0.114 19.571);
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-amber-100: oklch(96.2% 0.059 95.617);
-    --color-amber-600: oklch(66.6% 0.179 58.318);
     --color-amber-900: oklch(41.4% 0.112 45.904);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -175,51 +173,6 @@
   .static {
     position: static;
   }
-  .mb-5 {
-    margin-bottom: calc(var(--spacing) * 5);
-  }
-  .flex {
-    display: flex;
-  }
-  .flex-col {
-    flex-direction: column;
-  }
-  .items-center {
-    align-items: center;
-  }
-  .justify-around {
-    justify-content: space-around;
-  }
-  .justify-between {
-    justify-content: space-between;
-  }
-  .gap-5 {
-    gap: calc(var(--spacing) * 5);
-  }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
-  }
-  .rounded-2xl {
-    border-radius: var(--radius-2xl);
-  }
-  .bg-amber-100 {
-    background-color: var(--color-amber-100);
-  }
-  .bg-red-300 {
-    background-color: var(--color-red-300);
-  }
-  .bg-red-500 {
-    background-color: var(--color-red-500);
-  }
-  .p-4 {
-    padding: calc(var(--spacing) * 4);
-  }
-  .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
-  }
-  .py-2 {
-    padding-block: calc(var(--spacing) * 2);
-  }
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -228,17 +181,157 @@
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
-  .text-white {
-    color: var(--color-white);
+}
+.site-header {
+  margin-bottom: calc(var(--spacing) * 5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-amber-100);
+  padding: calc(var(--spacing) * 4);
+  @media (width >= 48rem) {
+    flex-direction: row;
   }
-  @media (hover: hover) {
-    .hover\:bg-amber-900:hover {
+}
+.site-title {
+  font-size: var(--text-2xl);
+  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+}
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: calc(var(--spacing) * 5);
+}
+.site-nav-list {
+  display: flex;
+  justify-content: space-around;
+  gap: calc(var(--spacing) * 10);
+}
+.site-login-button {
+  border-radius: var(--radius-2xl);
+  background-color: var(--color-red-500);
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  color: var(--color-white);
+  &:hover {
+    @media (hover: hover) {
       background-color: var(--color-amber-900);
     }
   }
-  @media (width >= 48rem) {
-    .md\:flex-row {
-      flex-direction: row;
+}
+.faculty-sorting {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #2c5aa0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  span {
+    color: #666;
+    font-weight: 500;
+  }
+  a {
+    color: #2c5aa0;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    &:hover {
+      background: #f0f4f8;
+    }
+    &.active {
+      background: #2c5aa0;
+      color: white;
+    }
+  }
+}
+.faculty-list {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  .faculty-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #fff;
+    transition: box-shadow 0.2s ease;
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+      margin: 0 0 0.5rem 0;
+      a {
+        color: #2c5aa0;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .faculty-meta {
+      color: #666;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+}
+.faculty-header {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  h1 {
+    color: #2c5aa0;
+    margin-bottom: 0.5rem;
+  }
+  .faculty-title {
+    color: #666;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+  }
+  .faculty-department {
+    color: #444;
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+.faculty-details {
+  max-width: 800px;
+  margin: 0 auto;
+  .detail-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #fff;
+    margin-bottom: 1.5rem;
+    h2 {
+      color: #2c5aa0;
+      margin: 0 0 1rem 0;
+      border-bottom: 2px solid #2c5aa0;
+      padding-bottom: 0.5rem;
+    }
+    .detail-item {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      strong {
+        color: #333;
+        display: inline-block;
+        min-width: 80px;
+      }
+      a {
+        color: #2c5aa0;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

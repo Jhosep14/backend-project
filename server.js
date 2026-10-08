@@ -1,45 +1,36 @@
-const path = require('path');
-const express = require('express');
-const app = express();
-const NODE_ENV = process.env.NODE_ENV || 'production';
-const port = process.env.PORT || 3000;
+import app from './src/app.js';
+import config from './src/config/config.js';
 
-
-
-// Serve static files from public directory (prevent stale CSS caching in dev)
-app.use(express.static(path.join(__dirname, 'public'), {
-    setHeaders: (res) => {
-        if (NODE_ENV.includes('dev')) {
-            res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-        }
+const server = app.listen(config.port, (error) => {
+    if (error) {
+        console.error('Failed to start the HTTP server:', error);
+        process.exitCode = 1;
+        return;
     }
-}));
 
-
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src', 'views'));
-
-
-
-// Routes
-
-app.get('/', (req, res) => {
-    const title = 'Welcome Home';
-    res.render('home', { title });
+    console.log(`Server is running at http://localhost:${config.port}`);
 });
 
-app.get('/about', (req, res) => {
-    const title = 'About Me';
-    res.render('about', { title });
-});
+let isShuttingDown = false;
 
-app.get('/products', (req, res) => {
-    const title = 'Our Products';
-    res.render('products', { title });
-});
+function shutdown(signal) {
+    if (isShuttingDown) {
+        return;
+    }
 
+    isShuttingDown = true;
+    console.log(`${signal} received. Closing the HTTP server.`);
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+    server.close((error) => {
+        if (error) {
+            console.error('Failed to close the HTTP server:', error);
+            process.exitCode = 1;
+            return;
+        }
+
+        console.log('HTTP server closed.');
+    });
+}
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
