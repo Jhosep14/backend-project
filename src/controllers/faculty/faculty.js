@@ -11,12 +11,14 @@ const facultyPage = (req, res) => {
     });
 };
 
-const facultyDetailPage = (req, res) => {
+const facultyDetailPage = (req, res, next) => {
     const facultyId = req.params.id;
     const facultyMember = getFacultyById(facultyId);
 
     if (!facultyMember) {
-        return res.status(404).send('404 Error: Faculty member not found.');
+        const error = new Error('404 Error: Faculty member not found.');
+        error.status = 404;
+        return next(error);
     }
 
     res.render('faculty/detail', {

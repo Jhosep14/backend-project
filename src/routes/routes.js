@@ -23,6 +23,7 @@ router.get('/catalog/:courseId', courseDetailPage);
 router.get('/demo', addDemoHeaders, demoPage);
 
 // Error Routes
-router.get('/error', testErrorPage);
+router.get('/test-error', testErrorPage);
+
 
 export default router;

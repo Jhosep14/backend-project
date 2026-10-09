@@ -26,8 +26,10 @@ app.use(addLocalVariables);
 app.use('/', routes);
 
 // 404 Catch-All Middleware
-app.use((req, res) => {
-    res.status(404).send('Page Not Found');
+app.use((req, res, next) => {
+    const error = new Error('Page Not Found');
+    error.status = 404;
+    next(error);
 });
 
 // Error Handling Middleware
@@ -35,9 +37,36 @@ app.use((err, req, res, next) => {
     if (res.headersSent) {
         return next(err);
     }
-    const statusCode = err.status || err.statusCode || 500;
+
+    const status = err.status || err.statusCode || 500;
+    const template = status === 404 ? '404' : '500';
+
     console.error(err.stack);
-    return res.status(statusCode).send(err.message || 'Internal Server Error');
+
+    const context = {
+        title: status === 404
+            ? 'Page Not Found'
+            : 'Server Error',
+        error: config.isDevelopment
+            ? err.message
+            : 'An error occurred.',
+        stack: config.isDevelopment
+            ? err.stack
+            : null,
+        NODE_ENV: config.nodeEnv,
+    };
+
+    try {
+        return res
+            .status(status)
+            .render(`errors/${template}`, context);
+    } catch (renderError) {
+        console.error(renderError);
+
+        return res
+            .status(status)
+            .send(`<h1>Error ${status}</h1>`);
+    }
 });
 
 export default app;
