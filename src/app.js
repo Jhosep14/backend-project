@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-// Error Handling Middleware
+// Global Error Handling Middleware
 app.use((err, req, res, next) => {
     if (res.headersSent) {
         return next(err);
