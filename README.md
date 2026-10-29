@@ -2,19 +2,10 @@
 
 CSE 340 catalog built with Express 5, EJS, Tailwind CSS 4, and PostgreSQL.
 
-## Local setup
+## Local development
 
-Requires Node.js 24, PostgreSQL, and pnpm. Install dependencies and configure
-`.env` with a PostgreSQL URL for the `cse340` database:
-
-```env
-NODE_ENV=development
-PORT=3000
-DB_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/cse340
-ENABLE_SQL_LOGGING=false
-```
-
-Keep `.env` private. Then run:
+Requires Node.js 24 and pnpm. Set `.env` with the CSE IO PostgreSQL connection
+string, including its SSL option, and a `SESSION_SECRET`. Keep `.env` private.
 
 ```bash
 pnpm install
@@ -23,24 +14,16 @@ pnpm run dev
 ```
 
 Open [http://localhost:3001](http://localhost:3001). The app creates the Unit 3
-tables and inserts missing seed data at startup without dropping existing rows.
+schema and seeds missing department, course, faculty, and section data at startup.
 
-## Production
+## Render deployment
 
-```bash
-pnpm run build:css
-pnpm start
-```
+Connect this repository to a Node web service on branch `main`. The included
+`render.yaml` defines the service, build, start, health check, and auto-deploy
+settings.
 
-## Render
+Set `DB_URL` to the same CSE IO connection string in your local `.env`, and set
+`SESSION_SECRET` to the same local value. Do not add `PORT`, `NODE_ENV`, or
+`ENABLE_SQL_LOGGING`; Render manages those settings.
 
-Connect the GitHub repository as a Node web service on branch `main`:
-
-- Build: `npm ci --include=dev && npm run build`
-- Start: `npm start`
-- Health check: `/`
-- Auto-deploy: enabled
-
-Set `DB_URL` to a PostgreSQL connection reachable from Render. A Render service
-cannot connect to a database through your computer's `localhost`. Render sets
-`PORT` and `NODE_ENV` automatically.
+[Unit 3 PostgreSQL](https://byui-cse.github.io/cse340-course/unit/3/prove/intro-to-postgres.html) · [Unit 4 deployment](https://byui-cse.github.io/cse340-course/unit/4/prove/deployment.html)
