@@ -8,7 +8,9 @@
     "build:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --minify",
     "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch",
     "dev": "concurrently \"node --env-file=.env --watch server.js\" \"tailwindcss -i ./src/css/input.css -o ./public/css/main.css --watch\" \"browser-sync start --proxy 'localhost:3000' --port 3001 --files 'public/css/*.css, src/views/**/*.ejs' --no-open\"",
-    "start": "node --env-file=.env server.js"
+    "start": "node server.js",
+    "db:check": "node --env-file-if-exists=.env scripts/check-db.js",
+    "build": "npm run build:css"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +18,8 @@
   "description": "",
   "dependencies": {
     "ejs": "^6.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

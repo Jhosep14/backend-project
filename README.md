@@ -1,50 +1,46 @@
 # Backend Project
 
-An Express.js web application built with EJS templating and Tailwind CSS v4.
+CSE 340 catalog built with Express 5, EJS, Tailwind CSS 4, and PostgreSQL.
 
-## Features
+## Local setup
 
-- **Express 5** server with dynamic EJS view rendering
-- **Tailwind CSS v4** with live compilation via `@tailwindcss/cli`
-- **Development Live-Reloading** via WebSocket
-- **Responsive Layout** with modern header and navigation partials
+Requires Node.js 24, PostgreSQL, and pnpm. Install dependencies and configure
+`.env` with a PostgreSQL URL for the `cse340` database:
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v20+)
-- pnpm (or npm)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Jhosep14/backend-project.git
-cd backend-project
-
-# Install dependencies
-pnpm install
-
-# Copy environment variables
-cp .env.example .env
+```env
+NODE_ENV=development
+PORT=3000
+DB_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/cse340
+ENABLE_SQL_LOGGING=false
 ```
 
-### Running Locally
+Keep `.env` private. Then run:
 
 ```bash
-# Start server and Tailwind CSS watcher concurrently
+pnpm install
+pnpm run db:check
 pnpm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3001](http://localhost:3001). The app creates the Unit 3
+tables and inserts missing seed data at startup without dropping existing rows.
 
-### Build for Production
+## Production
 
 ```bash
-# Build and minify CSS
 pnpm run build:css
-
-# Start production server
 pnpm start
 ```
+
+## Render
+
+Connect the GitHub repository as a Node web service on branch `main`:
+
+- Build: `npm ci --include=dev && npm run build`
+- Start: `npm start`
+- Health check: `/`
+- Auto-deploy: enabled
+
+Set `DB_URL` to a PostgreSQL connection reachable from Render. A Render service
+cannot connect to a database through your computer's `localhost`. Render sets
+`PORT` and `NODE_ENV` automatically.

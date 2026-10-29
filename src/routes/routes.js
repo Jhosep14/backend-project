@@ -13,11 +13,11 @@ router.get('/about', aboutPage);
 
 // Faculty Routes
 router.get('/faculty', facultyPage);
-router.get('/faculty/:id', facultyDetailPage);
+router.get('/faculty/:facultySlug', facultyDetailPage);
 
 // Catalog Routes
 router.get('/catalog', catalogPage);
-router.get('/catalog/:courseId', courseDetailPage);
+router.get('/catalog/:slugId', courseDetailPage);
 
 // Demo Routes
 router.get('/demo', addDemoHeaders, demoPage);

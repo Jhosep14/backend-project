@@ -2,8 +2,8 @@
 
 <main>
     <section class="course-header">
-        <h1><%= course.title %></h1>
-        <p class="course-meta"><%= course.id %> &bull; <%= course.credits %> credits</p>
+        <h1><%= course.name %></h1>
+        <p class="course-meta"><%= course.courseCode %> &bull; <%= course.creditHours %> credits</p>
         <p class="course-description"><%= course.description %></p>
     </section>
 
@@ -18,11 +18,14 @@
         </nav>
 
         <div class="section-list">
-            <% course.sections.forEach((section) => { %>
+            <% if (sections.length === 0) { %>
+                <p>No sections available.</p>
+            <% } %>
+            <% sections.forEach((section) => { %>
                 <article class="section-card">
                     <p class="section-time"><%= section.time %></p>
                     <p class="section-room">Room: <%= section.room %></p>
-                    <p class="section-professor">Instructor: <%= section.professor %></p>
+                    <p class="section-professor">Instructor: <a href="/faculty/<%= section.professorSlug %>"><%= section.professor %></a></p>
                 </article>
             <% }); %>
         </div>

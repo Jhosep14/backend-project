@@ -5,12 +5,12 @@
     <p class="course-catalog-description">Browse the available courses and select one to view its sections and instructors.</p>
 
     <div class="course-list">
-        <% Object.values(courses).forEach((course) => { %>
+        <% courses.forEach((course) => { %>
             <article class="course-card">
                 <h2 class="course-title">
-                    <a href="/catalog/<%= course.id %>"><%= course.title %></a>
+                    <a href="/catalog/<%= course.slug %>"><%= course.name %></a>
                 </h2>
-                <p class="course-id"><%= course.id %> &bull; <%= course.credits %> credits</p>
+                <p class="course-id"><%= course.courseCode %> &bull; <%= course.creditHours %> credits</p>
                 <p class="course-description"><%= course.description %></p>
             </article>
         <% }); %>

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: jhosep-backend-project
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    envVars:
+      - key: DB_URL
+        sync: false
